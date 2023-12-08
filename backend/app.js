@@ -5,19 +5,15 @@ import userRouter from "./routes/user-routes";
 
 dotenv.config();
 const app = express();
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 5000;
 
 // Middleware
-app.use(express.json());
-app.use("/user", userRouter);
+app.use('/user', userRouter);
 
 // Connect to MongoDB
-mongoose.set('useNewUrlParser', true); 
-mongoose.set('useUnifiedTopology', true);
 const connectDB = async () => {
     try {
         await mongoose.connect(process.env.MONGO_URL, {
-            useNewUrlParser: true,
             useUnifiedTopology: true,
         });
 

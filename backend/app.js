@@ -2,13 +2,16 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import userRouter from "./routes/user-routes";
+import adminRouter from "./routes/admin-routes";
 
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 5000;
 
 // Middleware
+app.use(express.json());
 app.use('/user', userRouter);
+app.use("/admin", adminRouter);
 
 // Connect to MongoDB
 const connectDB = async () => {

@@ -10,14 +10,26 @@ const movieSchema = new mongoose.Schema({
         required: true,
     },
     actors: {
-        type: [ String ],
+        type: [String],
         required: true,
     },
     releaseDate: {
         type: Date,
         required: true,
     },
-    posterUrl: { 
+    duration: {
+        type: String,
+        required: true,
+    },
+    genre: {
+        type: [ String ],
+        required: true,
+    },
+    price: {
+        type: Number,
+        required: true,
+    },
+    posterUrl: {
         type: String,
         required: true,
     },
@@ -25,10 +37,11 @@ const movieSchema = new mongoose.Schema({
         type: Boolean,
     },
     bookings: [{
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Booking',
     }],
     admin: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'Admin',
     },

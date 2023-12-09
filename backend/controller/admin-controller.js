@@ -40,7 +40,7 @@ if (!admin) {
    return res.status(201).json({ admin });
 };
 
-export const login = async (req, res, next) => {
+export const adminlogin = async (req, res, next) => {
     const { email, password } = req.body;
     if (
         (!email && email.trim() === "") &&
@@ -75,4 +75,18 @@ export const login = async (req, res, next) => {
 
     return res.status(200).json({ message: "Login Successful", token, id: existingAdmin._id });
 
+};
+
+export const getAdmins = async (req, res, next) => {
+    let admins;
+    try {
+        admins = await Admin.find();
+    }
+    catch (err) {
+        return console.log(err);
+    }
+    if (!admins) {
+        return res.status(500).json({ message: "Could not fetch admins" });
+    }
+    return res.status(200).json({ admins });
 };

@@ -1,5 +1,7 @@
 import jwt from "jsonwebtoken";
 import Movie from "../models/movie.js";
+import Admin from "../models/Admin.js";
+import mongoose from "mongoose";
 
 export const addMovie = async (req, res, next) => {
     const extractedToken = req.headers.authorization.split(" ")[1];
@@ -21,7 +23,7 @@ export const addMovie = async (req, res, next) => {
     });
 
     // if token is valid, add movie
-    const { title, description, actors, releaseDate, posterUrl, featured } = req.body;
+    const { title, description, actors, releaseDate, duration, genre, price, posterUrl, featured } = req.body;
 
     if (!title.trim() && !description.trim() && !releaseDate.trim() && !posterUrl.trim()) {
         return res.status(400).json({ message: "Invalid inputs" });
@@ -35,11 +37,23 @@ export const addMovie = async (req, res, next) => {
             description,
             actors,
             releaseDate: new Date(releaseDate),
+            duration,
+            genre,
+            price,
             posterUrl,
             featured,
             admin: adminId,
         });
-        movie = await movie.save();
+
+        const session = await mongoose.startSession();
+        const adminUser = await Admin.findById(adminId);
+        session.startTransaction();
+        await movie.save({ session });
+        adminUser.addedMovies.push(movie);
+        await adminUser.save({ session });
+        await session.commitTransaction();
+
+
     } catch (err) {
         console.error(err);
         return res.status(500).json({ message: "Something went wrong" });

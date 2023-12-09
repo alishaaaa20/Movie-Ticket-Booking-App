@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import userRouter from "./routes/user-routes";
 import adminRouter from "./routes/admin-routes";
+import movieRouter from "./routes/movie-routes";
 
 dotenv.config();
 const app = express();
@@ -12,6 +13,8 @@ const port = process.env.PORT || 5000;
 app.use(express.json());
 app.use('/user', userRouter);
 app.use("/admin", adminRouter);
+app.use("/movie", movieRouter);
+
 
 // Connect to MongoDB
 const connectDB = async () => {

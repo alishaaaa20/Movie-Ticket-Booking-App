@@ -1,5 +1,6 @@
 import User from "../models/user.js";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
 export const getAllUsers = async (req, res, next) => {
     
@@ -116,7 +117,10 @@ export const login = async (req, res, next) => {
     if (!isPasswordMatch) {
       return res.status(400).json({ success: false, message: "Invalid password" });
     }
-
-    return res.status(200).json({ message: "User logged in" });
+     
+    const token = jwt.sign({ id: existingUser._id }, process.env.SECRET_KEY, {
+        expiresIn: "10d",
+    });
+    return res.status(200).json({ message: "User logged in", token, id: existingUser._id });
       
 };

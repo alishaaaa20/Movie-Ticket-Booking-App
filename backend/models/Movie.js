@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const movieSchema = new mongoose.Schema ({
+const movieSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true,
@@ -10,23 +10,28 @@ const movieSchema = new mongoose.Schema ({
         required: true,
     },
     actors: {
-        type: String,
+        type: [ String ],
         required: true,
     },
     releaseDate: {
         type: Date,
         required: true,
     },
-    posterURL: {
+    posterUrl: { 
         type: String,
         required: true,
     },
     featured: {
         type: Boolean,
     },
-    bookings: {
+    bookings: [{
         type: String,
+    }],
+    admin: {
+        type: String,
+        required: true,
+        ref: 'Admin',
     },
-}, { timestamps: true });
+});
 
-export default mongoose.model("Movie", movieSchema);
+export default mongoose.model('Movie', movieSchema);

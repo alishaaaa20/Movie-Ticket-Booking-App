@@ -1,6 +1,7 @@
 import User from "../models/user.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import Bookings from "../models/Bookings.js";
 
 export const getAllUsers = async (req, res, next) => {
     
@@ -123,4 +124,21 @@ export const login = async (req, res, next) => {
     });
     return res.status(200).json({ message: "User logged in", token, id: existingUser._id });
       
+};
+
+export const getBookingsOfUser = async (req, res, next) => {
+    const id = req.params.id;
+
+    let bookings;
+
+    try {
+        bookings = await Bookings.find({ user: id });
+    } catch (err) {
+       return console.error(err);
+    }
+
+    if (!bookings) {
+        return res.status(404).json({ message: "Unable to find booking" });
+    }
+    return res.status(200).json({ bookings });
 };

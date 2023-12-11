@@ -35,6 +35,7 @@ const Movies = () => {
         justifyContent={"center"}
         flexWrap={"wrap"}
         margin={"auto"}
+        marginTop={4}
       >
         {movies && movies.map((movie, index) => (
           <MovieItem

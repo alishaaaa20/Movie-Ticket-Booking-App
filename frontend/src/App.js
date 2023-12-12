@@ -1,12 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "./components/Header";
 import { Routes, Route } from "react-router-dom";
 import Admin from "./components/Admin/Admin";
 import Movies from "./components/Movies/Movies";
 import Auth from "./components/Auth/Auth";
 import HomePage from "./components/HomePage";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { userActions } from "./store";
+import { adminActions } from "./store";
+
 
 function App() {
+
+  const dispatch = useDispatch();
+  const isAdminLoggedIn = useSelector((state) => state.admin.isLoggedIn);
+  const isUserLoggedIn = useSelector((state) => state.user.isLoggedIn);
+  console.log("isAdminLoggedIn", isAdminLoggedIn);
+  console.log("isUserLoggedIn", isUserLoggedIn);
+  useEffect(() => {
+    if (localStorage.getItem("userId")) {
+      dispatch(userActions.login());
+    }
+    else if (localStorage.getItem("adminId")) {
+      dispatch(adminActions.adminLogin());
+    }
+  }
+  , [dispatch]);
   return (
     <div>
       <Header />

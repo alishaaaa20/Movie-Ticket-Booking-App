@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-
 export const getAllMovies = async () => {
     try {
         const response = await axios.get('/movie');
@@ -30,3 +29,16 @@ export const sendUserAuthRequest = async (data, signup) => {
     const resData = await res.data;
     return resData;
 };
+
+export const sendAdminAuthRequest = async (data, signup) => {
+    const res = await axios.post("/admin/login", {
+        email: data.email,
+        password: data.password
+    }).catch((err) => console.log(err));
+
+    if(res.status !== 200 && res.status !== 201){
+        console.log("Unexpected Error Occured!");
+    }
+    const resData = await res.data;
+    return resData;
+}

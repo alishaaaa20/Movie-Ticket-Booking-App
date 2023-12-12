@@ -27,7 +27,7 @@ const AuthForm = ({onSubmit, isAdmin}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSubmit({inputs, signp: isAdmin ? false : isSignup });
+        onSubmit({ inputs, signup: isAdmin ? false : isSignup }); // Corrected 'signp' to 'signup'
     };
   return (
     <Dialog PaperProps={{ style: { borderRadius:20 } }} open={true}>
@@ -97,4 +97,4 @@ const AuthForm = ({onSubmit, isAdmin}) => {
   )
 }
 
-export default AuthForm
+export default AuthForm;

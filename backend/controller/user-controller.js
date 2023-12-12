@@ -43,7 +43,7 @@ export const signup = async (req, res, next) => {
         return res.status(500).json({ message: "Could not create user" });
     }
 
-    return res.status(201).json({ user });
+    return res.status(201).json({ id: user._id });
 }
 
 export const updateUser = async (req, res, next) => {
@@ -118,11 +118,7 @@ export const login = async (req, res, next) => {
     if (!isPasswordMatch) {
       return res.status(400).json({ success: false, message: "Invalid password" });
     }
-     
-    const token = jwt.sign({ id: existingUser._id }, process.env.SECRET_KEY, {
-        expiresIn: "10d",
-    });
-    return res.status(200).json({ message: "User logged in", token, id: existingUser._id });
+    return res.status(200).json({ message: "User logged in", id: existingUser._id });
       
 };
 

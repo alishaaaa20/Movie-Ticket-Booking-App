@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { userActions } from "./store";
 import { adminActions } from "./store";
+import Booking from "./components/Bookings/Booking";
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
           <Route path="/admin" element={<Admin />} />
           <Route path="/movies" element={<Movies />} />
           <Route path="/auth" element={<Auth />} />
+          <Route path="/booking/:id" element={<Booking />} />
         </Routes>
       </section>
     </div>

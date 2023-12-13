@@ -5,13 +5,15 @@ import {
     updateUser,
     deleteUser,
     login,
-    getBookingsOfUser
+    getBookingsOfUser,
+    getUserById
  } from '../controller/user-controller';
 
 const userRouter = express.Router();
 
 
 userRouter.get('/', getAllUsers);
+userRouter.get('/:id', getUserById);
 userRouter.post('/signup', signup);
 userRouter.put('/:id', updateUser);
 userRouter.delete('/:id', deleteUser);

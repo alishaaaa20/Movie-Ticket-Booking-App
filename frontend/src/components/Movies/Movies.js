@@ -42,6 +42,7 @@ const Movies = () => {
             id={movie._id}
             title={movie.title}
             posterUrl={movie.posterUrl}
+            releaseDate={movie.releaseDate}
             key={index}
           />
         ))}

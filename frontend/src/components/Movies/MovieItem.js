@@ -25,6 +25,7 @@ const MovieItem = ({ title, posterUrl, releaseDate, id }) => {
       </CardContent>
       <CardActions>
         <Button 
+        
         LinkComponent={Link}
         to={`/booking/${id}`}
         size="small" color="primary" sx={{ margin: "auto", color: "#008080" }}>

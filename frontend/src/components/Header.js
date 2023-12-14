@@ -75,7 +75,7 @@ const Header = () => {
             {!isAdminLoggedIn && !isUserLoggedIn && (
               <>
                 <Tab label="Admin" component={Link} to="/admin" />
-                <Tab label="Auth" component={Link} to="/auth" />
+                <Tab label="Login" component={Link} to="/auth" />
               </>
             )}
             {isUserLoggedIn && (

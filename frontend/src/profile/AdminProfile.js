@@ -50,7 +50,7 @@ const Admin = () => {
               admin.addedMovies.map((movie, index) => (
                 <ListItem
                   sx={{
-                    bgcolor: "#00d386",
+                    bgcolor: "#008080",
                     color: "white",
                     textAlign: "center",
                     margin: 1,
